@@ -1,0 +1,43 @@
+class appAsset{
+  static const String PathImg ='assets/images/';
+  static const String imgLogo = '${PathImg}imgLogo.png';
+  static const String imgRecent = '${PathImg}img_recent.png';
+  static const String imgLogin = '${PathImg}img_login.png';
+  static const String imgDowload = '${PathImg}img_download.png';
+
+  static const String PathIcon = 'assets/icons/';
+  static const String iconCharts = '${PathIcon}icon_charts.png';
+  static const String iconUser = '${PathIcon}icon_user.png';
+  static const String iconSeach = '${PathIcon}icon_seach.png';
+  static const String iconMV = '${PathIcon}icon_mv.png';
+  static const String iconHeart = '${PathIcon}icon_heart.png';
+  static const String iconHeartPress = '${PathIcon}icon_heart_press.png';
+  static const String iconPlay = '${PathIcon}icon_play.png';
+  static const String iconNext = '${PathIcon}icon_next.png';
+  static const String iconPrevious = '${PathIcon}icon_previous.png';
+  static const String iconPause = '${PathIcon}icon_pause.png';
+  static const String iconShuffle = '${PathIcon}icon_shuffle.png';
+  static const String iconRepeate = '${PathIcon}icon_repeate.png';
+  static const String iconRepeateOne = '${PathIcon}icon_repeate_one.png';
+  static const String iconDowloadAll = '${PathIcon}icon_dowload_all.png';
+  static const String iconShare = '${PathIcon}icon_share.png';
+  static const String iconAvataUser = '${PathIcon}icon_user_default.png';
+  static const String iconPen = '${PathIcon}icon_pen.png';
+  static const String iconDowload = '${PathIcon}icon_dowload.png';
+  static const String iconUpload = '${PathIcon}icon_upload.png';
+  static const String iconRecent = '${PathIcon}icon_recent.png';
+  static const String iconFollowers = '${PathIcon}icon_followers.png';
+  static const String iconHeadPhone = '${PathIcon}icon_headphone.png';
+  static const String iconSmartphone = '${PathIcon}icon_smartphone.png';
+  static const String iconFacebook = '${PathIcon}icon_facebook.png';
+  static const String iconGoogle = '${PathIcon}icon_google.png';
+  static const String iconApple = '${PathIcon}icon_apple.png';
+  static const String iconHeadPhoneBigSize = '${PathIcon}icon_headphone_bigsize.png';
+  static const String iconHome = '${PathIcon}icon_home.png';
+  static const String iconFollowed = '${PathIcon}icon_followed.png';
+  static const String iconClose = '${PathIcon}icon_close.png';
+  static const String iconMussicNote = '${PathIcon}icon_mussic.png';
+  static const String iconTop100 = '${PathIcon}icon_top.png';
+  static const String iconDownload = '${PathIcon}icon_download.png';
+  static const String iconDownloaded = '${PathIcon}icon_downloaded.png';
+}

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "452326886159",
+    "project_id": "mussic-app-aae9a",
+    "storage_bucket": "mussic-app-aae9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452326886159:android:cdf6fe756da4772464cc7a",
+        "android_client_info": {
+          "package_name": "com.example.mussic_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452326886159-987glvepu43fta4s5cjfilukol5c1kg2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJIzkk0yOr7ctujxMxVnJZQjP6Rpu1hEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452326886159-987glvepu43fta4s5cjfilukol5c1kg2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
