@@ -4,7 +4,6 @@
 ![z4537891088497_0b652b523af59128583ab599d839bea1](https://github.com/khanhduy122/mussic_app_flutter/assets/88194404/6e40722e-d32f-4a13-a14e-1676b654ed39)
 ![z4537891939399_bac41e1f764a82fc5bd48a36f163d1bc](https://github.com/khanhduy122/mussic_app_flutter/assets/88194404/f27d1b33-ef2a-463f-b2fb-e179631446f8)
 ![z4537893643019_443ec406ba502ea295ff54e41d004a9c](https://github.com/khanhduy122/mussic_app_flutter/assets/88194404/9248de7b-fa85-4515-bf83-ef0419e94982)
-![z4537895646426_0a7cdc4061faac744075ad90e1ed8049](https://github.com/khanhduy122/mussic_app_flutter/assets/88194404/41ac0a4c-31bf-4ca5-833d-8ec91c9a8266)
 ![z4537892690442_99ff471bc1d6c60bfcacfcd966c56ecf](https://github.com/khanhduy122/mussic_app_flutter/assets/88194404/350596ea-b4f6-4ce5-a1da-c91ab83b60b4)
 ![z4537897759596_193e63d0602e7c1e75cb86ed341e3792](https://github.com/khanhduy122/mussic_app_flutter/assets/88194404/8e9e8fd7-7967-4158-9403-4c7f20e5b101)
 ![z4537912405818_a377119cb5e9c1c2fc9e4073b4c3f915](https://github.com/khanhduy122/mussic_app_flutter/assets/88194404/82bd4641-79ad-4c0a-812f-713e4c6ebef3)
