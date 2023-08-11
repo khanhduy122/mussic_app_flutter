@@ -32,7 +32,6 @@ class VideoPlayerBloc extends Bloc<VideoPlayerEvent, VideoPlayerState>{
       if(event is VideoPlayerCompleteEvent){
         _videoPlayerController.removeListener(VideoPlayerComopleteState);
         emit(VideoPlayerState(isLoading: false, chewieController: _chewieController, isNextVideo: true));
-        print("emit NextVideoState");
       }
     });
   }

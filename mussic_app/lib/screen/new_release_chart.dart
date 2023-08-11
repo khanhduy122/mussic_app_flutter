@@ -27,14 +27,12 @@ class _NewReleaseChartScreenState extends State<NewReleaseChartScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     _controller.sink.add(20);
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _controller.close();
     super.dispose();
   }
@@ -132,10 +130,8 @@ class _NewReleaseChartScreenState extends State<NewReleaseChartScreen> {
                           child: StreamBuilder<int>(
                             stream: _controller.stream,
                             builder: (context, snapshot) {
-                              return Container(
-                                child: Text(lengthNewCharts == 20 ? "Xem Thêm" : "Thu nhỏ",
-                                  style: const TextStyle(color: appColor.LightGray, fontWeight: FontWeight.w500),
-                                ),
+                              return Text(lengthNewCharts == 20 ? "Xem Thêm" : "Thu nhỏ",
+                                style: const TextStyle(color: appColor.LightGray, fontWeight: FontWeight.w500),
                               );
                             }
                           ),

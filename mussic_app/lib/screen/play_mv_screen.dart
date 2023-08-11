@@ -39,7 +39,6 @@ class _PlayMvScreenState extends State<PlayMvScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     _videoPlayerBloc.add(VideoPlayerLoadURLEvent(url: widget.mv.streaming!.mp4!.s720p!));
     appState.firebaseBloc.add(getLikeVideoEvent(encodeId: widget.mv.encodeId!));
     super.initState();
@@ -47,7 +46,6 @@ class _PlayMvScreenState extends State<PlayMvScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _videoPlayerBloc.dispose();
 
@@ -154,7 +152,6 @@ class _PlayMvScreenState extends State<PlayMvScreen> {
                                   },
                                   listener: (context, state) {},
                                   builder: (context, state) {
-                                    print("like Video");
                                     if(state is LikeVideoState){
                                       isHeart = state.isHeart;
                                     }
@@ -172,7 +169,7 @@ class _PlayMvScreenState extends State<PlayMvScreen> {
                                   }
                                 ),
                                 const SizedBox(width: 20,),
-                                Image.asset(appAsset.iconDowload, color: Colors.white, height: 30,fit: BoxFit.cover)
+                                Image.asset(appAsset.iconDownload, color: Colors.white, height: 30,fit: BoxFit.cover)
                               ],
                             ),
                             const SizedBox(height: 20,),
@@ -204,7 +201,7 @@ class _PlayMvScreenState extends State<PlayMvScreen> {
                                   ),
                                   const SizedBox(width: 10,),
                                   Expanded(
-                                    child: Container(
+                                    child: SizedBox(
                                       height: 20,
                                       child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
@@ -212,7 +209,7 @@ class _PlayMvScreenState extends State<PlayMvScreen> {
                                         physics: const NeverScrollableScrollPhysics(),
                                         itemCount: widget.mv.artists!.length,
                                         itemBuilder: (context, index) {
-                                          return  Text(index == widget.mv.artists!.length - 1 ? "${widget.mv.artists![index].name!}" : "${widget.mv.artists![index].name!}, ", 
+                                          return  Text(index == widget.mv.artists!.length - 1 ? widget.mv.artists![index].name! : "${widget.mv.artists![index].name!}, ", 
                                           overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                                           );
@@ -228,12 +225,12 @@ class _PlayMvScreenState extends State<PlayMvScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Text("Xem Tiếp",
-                                  style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                                 ),
                                 Row(
                                   children: [
                                     const Text("Tự Động Phát",
-                                      style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
                                     ),
                                     CupertinoSwitch(
                                       activeColor: Colors.blue,
@@ -285,7 +282,7 @@ class _PlayMvScreenState extends State<PlayMvScreen> {
       isScrollControlled: true,
       builder: (context) {
         return FractionallySizedBox(
-          heightFactor: artists == 1 ? 0.2 : artists.length * 0.15,
+          heightFactor: artists.length == 1 ? 0.2 : artists.length * 0.15,
           child: Container(
             decoration: const BoxDecoration(
               gradient: gradient.defaultGradientBackground,

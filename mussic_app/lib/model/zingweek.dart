@@ -9,9 +9,9 @@ class zingWeek {
   zingWeek({this.vn, this.us, this.korea});
 
   zingWeek.fromJson(Map<String, dynamic> json) {
-    vn = json['vn'] != null ? new SongCountry.fromJson(json['vn']) : null;
-    us = json['us'] != null ? new SongCountry.fromJson(json['us']) : null;
-    korea = json['korea'] != null ? new SongCountry.fromJson(json['korea']) : null;
+    vn = json['vn'] != null ?  SongCountry.fromJson(json['vn']) : null;
+    us = json['us'] != null ?  SongCountry.fromJson(json['us']) : null;
+    korea = json['korea'] != null ?  SongCountry.fromJson(json['korea']) : null;
   }
 }
 
@@ -63,7 +63,7 @@ class SongCountry{
     if (json['items'] != null) {
       items = <ItemsSongCountry>[];
       json['items'].forEach((v) {
-        items!.add(new ItemsSongCountry.fromJson(v));
+        items!.add( ItemsSongCountry.fromJson(v));
       });
     }
     sectionId = json['sectionId'];
@@ -136,7 +136,7 @@ class ItemsSongCountry {
     if (json['artists'] != null) {
       artists = <Artist>[];
       json['artists'].forEach((v) {
-        artists!.add(new Artist.fromJson(v));
+        artists!.add( Artist.fromJson(v));
       });
     }
     isWorldWide = json['isWorldWide'];
@@ -149,7 +149,7 @@ class ItemsSongCountry {
     preRelease = json['preRelease'];
     releaseDate = json['releaseDate'];
     genreIds = json['genreIds'].cast<String>();
-    album = json['album'] != null ? new Album.fromJson(json['album']) : null;
+    album = json['album'] != null ?  Album.fromJson(json['album']) : null;
     isIndie = json['isIndie'];
     streamingStatus = json['streamingStatus'];
     allowAudioAds = json['allowAudioAds'];

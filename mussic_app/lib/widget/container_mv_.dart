@@ -17,7 +17,7 @@ class ContainerMV extends StatelessWidget {
           onTap: onTap,
           child: Container(
             height: 300,
-            margin: EdgeInsets.only(right: 10),
+            margin: const EdgeInsets.only(right: 10),
               child: Column(
                 children: [
                   Stack(
@@ -136,7 +136,7 @@ class ContainerMV extends StatelessWidget {
                     ],
                   ),
                   Expanded(
-                    child: Container(margin: EdgeInsets.only(left: 10),
+                    child: Container(margin: const EdgeInsets.only(left: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,

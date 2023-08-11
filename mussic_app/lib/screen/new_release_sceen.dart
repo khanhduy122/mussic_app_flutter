@@ -18,7 +18,6 @@ class _NewReleaseScreenState extends State<NewReleaseScreen> {
  
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
   @override

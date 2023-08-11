@@ -16,7 +16,7 @@ class ContainerPlayListHot extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return axis == Axis.vertical ? GestureDetector(
       onTap: ontap,
-      child: Container(
+      child: SizedBox(
         height: height,
         width: width,
         child: Column(

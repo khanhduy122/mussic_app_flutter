@@ -23,11 +23,9 @@ class ContainerItemUserScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              child: Image.asset(icon,
-                height: 30,
-                fit: BoxFit.fill,
-              ),
+            Image.asset(icon,
+              height: 30,
+              fit: BoxFit.fill,
             ),
             Text(tiltle,
               style: const TextStyle(color: appColor.LightGray, fontSize: 12, fontWeight: FontWeight.w500),

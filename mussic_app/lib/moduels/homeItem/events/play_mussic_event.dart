@@ -23,3 +23,9 @@ class getInfoArtistEvent extends playMussicEvent{
 
   getInfoArtistEvent({required this.name});
 }
+
+class getResultSearchEvent extends playMussicEvent{
+  String keySearch;
+
+  getResultSearchEvent({required this.keySearch});
+}

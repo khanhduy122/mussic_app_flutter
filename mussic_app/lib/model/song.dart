@@ -39,7 +39,7 @@ class Song {
     if (json['artists'] != null) {
       artists = <Artist>[];
       json['artists'].forEach((v) {
-        artists!.add(new Artist.fromJson(v));
+        artists!.add( Artist.fromJson(v));
       });
     }
     thumbnailM = json['thumbnailM'];
@@ -74,7 +74,7 @@ class Song {
     if (json['artists'] != null) {
       artists = <Artist>[];
       json['artists'].forEach((v) {
-        artists!.add(new Artist.fromJson(v));
+        artists!.add( Artist.fromJson(v));
       });
     }
     thumbnailM = json['thumbnailM'];

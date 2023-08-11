@@ -9,9 +9,11 @@ import 'package:mussic_app/component/appKey.dart';
 import 'package:mussic_app/component/appState.dart';
 import 'package:mussic_app/component/app_assets.dart';
 import 'package:mussic_app/component/app_color.dart';
+import 'package:mussic_app/model/exceptions.dart';
 import 'package:mussic_app/moduels/firebase/repos/firebase_repo.dart';
 import 'package:mussic_app/model/song.dart';
 import 'package:mussic_app/moduels/homeItem/blocs/get_home_data_bloc.dart';
+import 'package:mussic_app/screen/erro_screen.dart';
 import 'package:mussic_app/screen/home_screen.dart';
 import 'package:mussic_app/screen/play_mussic_screen.dart';
 import 'package:mussic_app/screen/splash_screen.dart';
@@ -34,7 +36,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: appColor.primaryColor,
-        backgroundColor: appColor.primaryColor,
         scaffoldBackgroundColor: appColor.primaryColor
       ),
       home: const MainScreen(),
@@ -57,29 +58,27 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
 
 
   Future<void> getSongPlayed() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     if(appState.isGetSongPlayed == false ){
-      if(_prefs.getString(appKey.songPlayed) != null){
-        appState.currentSong =  Song.fromJson(jsonDecode(_prefs.getString(appKey.songPlayed)!));
+      if(prefs.getString(appKey.songPlayed) != null){
+        appState.currentSong =  Song.fromJson(jsonDecode(prefs.getString(appKey.songPlayed)!));
       }
     }
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     if(appState.user != null){
       FirebaseRepo.getCurrentUserProfile();
     }
-    _homeDataBloc.add(getHomeDataEvet());
+    _homeDataBloc.add(getHomeDataEvent());
     getSongPlayed();
     super.initState();
-    _animationController = AnimationController(vsync: this, duration: Duration(seconds: 5))..repeat();
+    _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 5))..repeat();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _animationController.dispose();
     appState.streamCurrentSong.close();
     super.dispose();
@@ -120,7 +119,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                   ),
                   TabItem(
                     icon: RotationTransition(
-                     turns: Tween(begin: 0.0, end: 1.0).animate(_animationController),
+                    turns: Tween(begin: 0.0, end: 1.0).animate(_animationController),
                       child: StreamBuilder(
                         stream: appState.streamCurrentSong.stream,
                         builder: (context, snapshot) {
@@ -145,7 +144,59 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
             );
           }
           if(state.erro != null){
-            return Center(child: Text(state.erro.toString()),);
+            if(state.erro is NoIntenetException){
+              return Scaffold(
+                body: IndexedStack(
+                  index: indexScreen,
+                  children: [
+                    ErroScreen(
+                      onTapRefresh: () {
+                        appDiaLog.ShowDialogLoading(context);
+                        _homeDataBloc.add(refreshGetHomeDataEvent(context: context));
+                      },
+                    ),
+                    ErroScreen(
+                      onTapRefresh: () {
+                        _homeDataBloc.add(refreshGetHomeDataEvent(context: context));
+                      },
+                    ),
+                    const UserScreen()
+                  ],
+                ),
+                  bottomNavigationBar: ConvexAppBar(
+                  backgroundColor: Colors.black,
+                  color: Colors.white,
+                  activeColor: Colors.blue,
+                  initialActiveIndex: 0,
+                  style: TabStyle.fixed,
+                  onTap: (index){
+                    setState(() {
+                      indexScreen = index;
+                    });
+                  },
+                  items: [
+                    TabItem(
+                      icon: indexScreen != 0 ? Image.asset(appAsset.iconHome, color: Colors.white, height: 60,) : Image.asset(appAsset.iconHome, height: 60),
+                    ),
+                    TabItem(
+                      icon: Container(
+                        height: 40,
+                        width: 40,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: gradient.GradientButtonPlay
+                        ),
+                        child: Image.asset(appAsset.iconPlay, height: 20, fit: BoxFit.cover,)
+                      )
+                    ),
+                    TabItem(
+                      icon: indexScreen != 2 ? Image.asset(appAsset.iconUser, color: Colors.white,) : Image.asset(appAsset.iconUser,),
+                    ),
+                  ],
+                ),
+              );
+            }
           }
     
           return const SplashScreen();

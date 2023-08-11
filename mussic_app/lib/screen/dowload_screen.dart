@@ -28,19 +28,18 @@ class _DowloadScreenState extends State<DowloadScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getListSongDowload();
     super.initState();
   }
 
   Future<void> getListSongDowload() async{
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    if(_prefs.getStringList(appKey.listSongDowloaded) != null){
-      List<String> listsongs = _prefs.getStringList(appKey.listSongDowloaded)!.sublist(0);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(prefs.getStringList(appKey.listSongDowloaded) != null){
+      List<String> listsongs = prefs.getStringList(appKey.listSongDowloaded)!.sublist(0);
       songs.clear();
-      listsongs.forEach((element) {
+      for (var element in listsongs) {
         songs.add(Song.fromJson(jsonDecode(element)));
-      });
+      }
       setState(() {});
     }
    
@@ -83,7 +82,7 @@ class _DowloadScreenState extends State<DowloadScreen> {
                                 children: [
                                   Stack(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 60,
                                         child: ContainerListMussicNew(
                                           song: state.song!, 
@@ -100,7 +99,7 @@ class _DowloadScreenState extends State<DowloadScreen> {
                                       Positioned(
                                         top: 10,
                                         left: 10,
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 40,
                                           width: 40,
                                           child: CircularProgressIndicator(
@@ -143,6 +142,7 @@ class _DowloadScreenState extends State<DowloadScreen> {
                                     appState.listSong = songs;
                                     appState.indexSong = index;
                                     appState.isShuffle = null;
+                                    appState.isGetSongPlayed = true;
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => playMussicScreen()));
                                   }
                                 ),

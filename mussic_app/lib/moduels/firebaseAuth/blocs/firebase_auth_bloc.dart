@@ -11,7 +11,7 @@ import 'package:mussic_app/screen/verify_OTP_screen.dart';
 
 class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState>{
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   String verifiID = "";
   String numberPhone = '';
 
@@ -27,7 +27,6 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState>{
           verificationCompleted: (PhoneAuthCredential credential) {},
           verificationFailed: (FirebaseAuthException e) {
             isErroSendCode = true;
-            print(e.code);
             Navigator.pop(event.context);
             if(e.code == "too-many-requests"){
               appDiaLog.showDialogNotify(content: "Bạn đã đăng nhập qua nhều lần, hãy thử lại sao", context: event.context);
@@ -55,7 +54,6 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState>{
         try{
           PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verifiID, smsCode: event.codeOTP);
           await _auth.signInWithCredential(credential);
-          print("OTP Succes");
           if(await FirebaseAuthRepo.userExists(numberPhone)){
             await FirebaseRepo.getCurrentUserProfile();
             add(LoggedSuccess());
@@ -73,7 +71,6 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState>{
             appDiaLog.ToastNotifi(title: 'Mã OTP không đúng, vui lòng nhập lại');
           }
           Navigator.pop(event.context);
-          print('ERROR: '+e.toString());
           
         }
       }
@@ -83,7 +80,6 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState>{
           phoneNumber: event.numberPhone,
           verificationCompleted: (PhoneAuthCredential credential) {},
           verificationFailed: (FirebaseAuthException e) {
-            print(e.code);
             if(e.code == "too-many-requests"){
               appDiaLog.showDialogNotify(content: "Bạn đã đăng nhập qua nhều lần, hãy thử lại sao", context: event.context);
             }

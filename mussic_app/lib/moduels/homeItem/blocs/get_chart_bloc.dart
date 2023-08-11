@@ -5,43 +5,42 @@ import 'package:mussic_app/model/song.dart';
 import 'package:mussic_app/model/top100.dart';
 import 'package:mussic_app/moduels/homeItem/repos/get_chart_repo.dart';
 
-class getChartBloc extends Bloc<getChartEvent, getChartState>{
-  getChartBloc() : super(getChartState()){
+class GetChartBloc extends Bloc<GetChartEvent, GetChartState>{
+  GetChartBloc() : super(GetChartState()){
     on((event, emit) async {
-      if(event is getChartBXHEvent){
+      if(event is GetChartBXHEvent){
         try {
-          emit(getChartState(isLoaded: true));
+          emit(GetChartState(isLoaded: true));
           final res = await getChartRepo.getChart(http.Client());
           if(res != null){
-            emit(getChartState(chart: res, isLoaded: false));
+            emit(GetChartState(chart: res, isLoaded: false));
           }
         } catch (e) {
-          emit(getChartState(erro: e, isLoaded: false, ));
+          emit(GetChartState(erro: e, isLoaded: false, ));
         }
       }
 
-      if(event is getTop100Event){
-        emit(getChartState(isLoaded: true));
+      if(event is GetTop100Event){
+        emit(GetChartState(isLoaded: true));
         try {
           final res = await getChartRepo.getTop100(http.Client());
-           print("get topp 100");
           if(res != null){
-            emit(getChartState(isLoaded: false, top100: res, ));
+            emit(GetChartState(isLoaded: false, top100: res, ));
           }
         } catch (e) {
-          emit(getChartState(erro: e, isLoaded: false, top100: null, chart: null, newReleaseChart: null));
+          emit(GetChartState(erro: e, isLoaded: false, top100: null, chart: null, newReleaseChart: null));
         }
       }
 
-      if(event is getNewReleaseChartEvent){
-        emit(getChartState(isLoaded: true));
+      if(event is GetNewReleaseChartEvent){
+        emit(GetChartState(isLoaded: true));
         try {
           final res = await getChartRepo.getNewReleaseChart(http.Client());
           if(res != null){
-            emit(getChartState(isLoaded: false, top100: null, chart: null, newReleaseChart: res));
+            emit(GetChartState(isLoaded: false, top100: null, chart: null, newReleaseChart: res));
           }
         } catch (e) {
-          emit(getChartState(erro: e, isLoaded: false, top100: null, chart: null, newReleaseChart: null));
+          emit(GetChartState(erro: e, isLoaded: false, top100: null, chart: null, newReleaseChart: null));
         }
       }
     });
@@ -49,19 +48,19 @@ class getChartBloc extends Bloc<getChartEvent, getChartState>{
   
 }
 
-class getChartState{
+class GetChartState{
   Object? erro;
   Chart? chart;
   List<Top100>? top100;
   List<Song>? newReleaseChart;
   bool? isLoaded;
-  getChartState({this.chart, this.erro, this.isLoaded, this.newReleaseChart, this.top100});
+  GetChartState({this.chart, this.erro, this.isLoaded, this.newReleaseChart, this.top100});
 }
 
-abstract class getChartEvent {}
+abstract class GetChartEvent {}
 
-class getChartBXHEvent extends getChartEvent{}
+class GetChartBXHEvent extends GetChartEvent{}
 
-class getTop100Event extends getChartEvent{}
+class GetTop100Event extends GetChartEvent{}
 
-class getNewReleaseChartEvent extends getChartEvent{}
+class GetNewReleaseChartEvent extends GetChartEvent{}

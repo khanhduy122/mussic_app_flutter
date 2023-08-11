@@ -29,10 +29,10 @@ class SeeMoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _getInfoPlayList = PlayMussicBloc();
+    final getInfoPlayList = PlayMussicBloc();
 
     return BlocListener<PlayMussicBloc, PlayMussicState>(
-      bloc: _getInfoPlayList,
+      bloc: getInfoPlayList,
       listener: (context, state) {
         if(state.isLoading == true){
           appDiaLog.ShowDialogLoading(context);
@@ -84,7 +84,7 @@ class SeeMoreScreen extends StatelessWidget {
                 playList: listPlayList![index], 
                 axis: Axis.vertical, 
                 ontap: (){
-                  _getInfoPlayList.add(getInfoPlayListEvent(encodeId: listPlayList![index].encodeId!));
+                  getInfoPlayList.add(getInfoPlayListEvent(encodeId: listPlayList![index].encodeId!));
                 }
               );
             },

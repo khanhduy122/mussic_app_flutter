@@ -24,7 +24,7 @@ class DownLoadBloc extends Bloc<DowloadEvent, DownLoadState>{
 
           Directory(newFolderMp3).createSync(recursive: true);
 
-          String filePath = '${newFolderMp3}/${event.song.encodeId!}.mp3';
+          String filePath = '$newFolderMp3/${event.song.encodeId!}.mp3';
 
           String url = await audioPlayerRepo.fetchLinkSong(http.Client(), event.song.encodeId!);
           await _dio.download(
@@ -32,7 +32,6 @@ class DownLoadBloc extends Bloc<DowloadEvent, DownLoadState>{
             filePath,
             onReceiveProgress: (count, total) {
               emit(DownloadingState(song: event.song, isDowloading: true, progress: (count * 1.0/total)));
-              print("emit download progress");
             },
           );
 
@@ -45,7 +44,7 @@ class DownLoadBloc extends Bloc<DowloadEvent, DownLoadState>{
           await prefs.setStringList(appKey.listSongDowloaded, listSongDowloaded);
           emit(DownloadSuccess(song: event.song));
         } catch (e) {
-          print("erro : $e");
+          
         }
         
       }

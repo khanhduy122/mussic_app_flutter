@@ -20,10 +20,8 @@ class ContainerSeeMore extends StatelessWidget {
           color: const Color(0xff222222),
           borderRadius: BorderRadius.circular(20)
         ),
-        child: Container(
-          child: Text(title,
-            style: const TextStyle(color: appColor.LightGray, fontWeight: FontWeight.w500),
-          ),
+        child: Text(title,
+          style: const TextStyle(color: appColor.LightGray, fontWeight: FontWeight.w500),
         ),
       ),
     );

@@ -5,6 +5,7 @@ import 'package:mussic_app/component/appState.dart';
 import 'package:mussic_app/component/app_assets.dart';
 import 'package:mussic_app/component/app_color.dart';
 import 'package:mussic_app/model/HomeData.dart';
+import 'package:mussic_app/model/exceptions.dart';
 import 'package:mussic_app/moduels/homeItem/blocs/get_chart_bloc.dart';
 import 'package:mussic_app/moduels/homeItem/blocs/get_home_data_bloc.dart';
 import 'package:mussic_app/moduels/homeItem/blocs/play_mussic_bloc.dart';
@@ -44,13 +45,13 @@ class _HomeScreenState extends State<HomeScreen> {
   final StreamController<int> streamCtlrTabnew = StreamController<int>();
 
   final _playMussicBloc = PlayMussicBloc();
-  final _getChart = getChartBloc();
+  final _getChart = GetChartBloc();
   final _homeDataBloc = getHomeDataBloc();
 
 
   @override
   void initState() {
-    _homeDataBloc.add(getHomeDataEvet());
+    _homeDataBloc.add(getHomeDataEvent());
     _timer = Timer.periodic(Duration(seconds: 5), (timer) {
       if (_currenIndexIndicator < widget.homeData.banner!.items!.length-1) {
         _currenIndexIndicator ++;
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: BlocListener<getChartBloc, getChartState>(
+        child: BlocListener<GetChartBloc, GetChartState>(
           bloc: _getChart,
           listener: (context, state) {
             if(state.isLoaded == true){
@@ -127,14 +128,16 @@ class _HomeScreenState extends State<HomeScreen> {
         
                 final playList = state.playList;
                 if(playList != null){
-                  print("navigator Playlisst");
                   Navigator.pop(context);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => PlayListScreen(playList: playList),));
                 }
         
                 final erro = state.erro;
                 if(erro != null){
-                  appDiaLog.ToastNotifi(title: "Lỗi");
+                  if(erro is NoIntenetException){
+                    Navigator.pop(context);
+                    appDiaLog.showDialogNotify(content: "Vui lòng kiểm tra kết nối mạng", context: context);
+                  }
                 }
               },
               child: SingleChildScrollView(
@@ -250,21 +253,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             icon: appAsset.iconCharts,
                             title: 'BXH',
                             ontap: (){
-                              _getChart.add(getChartBXHEvent());
+                              _getChart.add(GetChartBXHEvent());
                             },
                           ),
                           ContainerHomeWidget(
                             icon: appAsset.iconTop100,
                             title: 'Top 100',
                             ontap: (){
-                              _getChart.add(getTop100Event());
+                              _getChart.add(GetTop100Event());
                             },
                           ),
                           ContainerHomeWidget(
                             icon: appAsset.iconMussicNote,
                             title: 'Nhạc Mới',
                             ontap: (){
-                              _getChart.add(getNewReleaseChartEvent());
+                              _getChart.add(GetNewReleaseChartEvent());
                             },
                           ),
                         ],
@@ -485,7 +488,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(height: 10,),
                           GestureDetector(
                             onTap: (){
-                              _getChart.add(getChartBXHEvent());
+                              _getChart.add(GetChartBXHEvent());
                             },
                             child: Container(
                               alignment: Alignment.center,

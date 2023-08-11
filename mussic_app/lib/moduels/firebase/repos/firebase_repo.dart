@@ -44,8 +44,6 @@ class FirebaseRepo{
   static Future<void> getCurrentUserProfile() async {
     try {
       final data = await firestore.collection(collectionUser).doc(appState.user!.phoneNumber).get();
-      print( "phone ${FirebaseAuth.instance.currentUser!.phoneNumber}");
-      print( "has data ${data.exists}");
       if(data.exists){
         appState.userProfile = UserProfile.formJson(data.data()!);
       }

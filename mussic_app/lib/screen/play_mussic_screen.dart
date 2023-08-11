@@ -67,11 +67,11 @@ class __playMusicState extends State<playMussicScreen> {
      BlocListener(
       bloc: appState.audioBloc,
       listener: (context, state) {
-        if(state is nextMussic) {
+        if(state is NextMussic) {
           setState(() {});
         }
     
-        if(state is backMussic){
+        if(state is BackMussic){
           setState(() {});
         }
       },
@@ -225,11 +225,11 @@ class __playMusicState extends State<playMussicScreen> {
                         ),
                       ),
                 
-                      BlocBuilder<AudioPlayerBloc, audiPlayerState>(
+                      BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
                         bloc: appState.audioBloc,
                         builder: (context, state) {
                           
-                          if(state is audiPlayerState){
+                          if(state is AudioPlayerState){
                   
                             if(state.isLoading == false && state.isPlaying == true && state.duration != null){
                               if(state.currentPosition! >= state.duration!){
@@ -371,10 +371,10 @@ class __playMusicState extends State<playMussicScreen> {
                           mainAxisAlignment:
                               MainAxisAlignment.spaceAround,
                           children: [
-                            BlocBuilder<AudioPlayerBloc, audiPlayerState>(
+                            BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
                               bloc: appState.audioBloc ,
                               builder: (context, state) {
-                                if(state is audiPlayerState){
+                                if(state is AudioPlayerState){
                   
                                   if(state.isShuffle != null){
                                     isShuffle = state.isShuffle!;
@@ -424,10 +424,10 @@ class __playMusicState extends State<playMussicScreen> {
                                         appAsset.iconPrevious),
                                   ),
                   
-                                  BlocBuilder<AudioPlayerBloc, audiPlayerState>(
+                                  BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
                                     bloc: appState.audioBloc,
                                     builder: (context, state) {
-                                      if(state is audiPlayerState){
+                                      if(state is AudioPlayerState){
                                         if(state.isPlaying != null){
                                           isPlaying = state.isPlaying!;
                                         }
@@ -487,10 +487,10 @@ class __playMusicState extends State<playMussicScreen> {
                                 ],
                               ),
                             ),
-                            BlocBuilder<AudioPlayerBloc, audiPlayerState>(
+                            BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
                               bloc: appState.audioBloc,
                               builder: (context, state) {
-                                if(state is audiPlayerState){
+                                if(state is AudioPlayerState){
                                   if(state.isRepeate != null){
                                     isRepeate = state.isRepeate!;
                                   }

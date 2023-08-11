@@ -18,7 +18,7 @@ class Top100 {
 		sectionId = json['sectionId'];
 		if (json['items'] != null) {
 			playLists = <PlayList>[];
-			json['items'].forEach((v) { playLists!.add(new PlayList.fromJson(v)); });
+			json['items'].forEach((v) { playLists!.add( PlayList.fromJson(v)); });
 		}
 	}
 }

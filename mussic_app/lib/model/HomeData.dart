@@ -157,25 +157,25 @@ class Items {
     if (json['artists'] != null) {
       artists = <Artist>[];
       json['artists'].forEach((v) {
-        artists!.add(new Artist.fromJson(v));
+        artists!.add( Artist.fromJson(v));
       });
     }
     if(json['all'] != null){
       allSongs = <Song>[];
       json['all'].forEach((v){
-        allSongs!.add(new Song.fromJson(v));
+        allSongs!.add( Song.fromJson(v));
       });
     }
     if(json['vPop'] != null){
       vpop = <Song>[];
       json['vPop'].forEach((v){
-        vpop!.add(new Song.fromJson(v));
+        vpop!.add( Song.fromJson(v));
       });
     }
     if(json['others'] != null){
       other = <Song>[];
       json['others'].forEach((v){
-        other!.add(new Song.fromJson(v));
+        other!.add( Song.fromJson(v));
       });
     }
     artistsNames = json['artistsNames'];
@@ -187,7 +187,7 @@ class Items {
     alias = json['alias'];
     totalTopZing = json['totalTopZing'];
     artist =
-        json['artist'] != null ? new Artist.fromJson(json['artist']) : null;
+        json['artist'] != null ?  Artist.fromJson(json['artist']) : null;
     thumbType = json['thumbType'];
     type = json["type"];
   }

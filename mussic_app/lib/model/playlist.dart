@@ -33,7 +33,7 @@ class PlayList {
         if (json['song']['items'] != null) {
         songs = <Song>[];
         json['song']['items'].forEach((v) {
-          songs!.add(new Song.fromJson(v));
+          songs!.add( Song.fromJson(v));
         });
       }
     }
@@ -48,7 +48,7 @@ class PlayList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['encodeId'] = encodeId;
     data['title'] = title;
     data['thumbnail'] = thumbnail;

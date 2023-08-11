@@ -20,7 +20,6 @@ class _EditNameScreenState extends State<EditNameScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _editingController.dispose();
     super.dispose();
   }

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mussic_app/component/app_assets.dart';
 import 'package:mussic_app/model/song.dart';
 
 class ContainerListMussicNew extends StatelessWidget {
@@ -14,7 +16,7 @@ class ContainerListMussicNew extends StatelessWidget {
     return InkWell(
       onLongPress: onLongPress,
       onTap: ontap,
-      child: Container(
+      child: SizedBox(
         height: 60,
         width: size.width,
         child: Row(
@@ -25,12 +27,32 @@ class ContainerListMussicNew extends StatelessWidget {
               width: 60,
               margin: const EdgeInsets.only(right: 10),
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(song.thumbnail!),
-                  fit: BoxFit.fill
-                ),
-                borderRadius: BorderRadius.circular(10)
+                borderRadius: BorderRadius.circular(10),
               ),
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: song.thumbnail!,
+                imageBuilder: (context, imageProvider) => Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: imageProvider
+                    )
+                  ),
+                ),
+                errorWidget: (context, url, error) => Container(
+                  height: 60,
+                  width: 60,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Image.asset(appAsset.iconMussicNote, color: Colors.grey,)
+                ),
+            ),
             ),
             Expanded(
               child: Column(

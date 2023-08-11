@@ -41,7 +41,6 @@ class _ArtistScreenState extends State<ArtistProfileScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     if(appState.user != null){
       appState.firebaseBloc.add(getFollowArtistEvent(id: widget.artist.id!));
     }
@@ -51,7 +50,6 @@ class _ArtistScreenState extends State<ArtistProfileScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _pageControllerMV.dispose();
     super.dispose();
   }
@@ -117,10 +115,8 @@ class _ArtistScreenState extends State<ArtistProfileScreen> {
                         margin: EdgeInsets.only(top: size.height/3),
                         child: Column(
                           children: [
-                            Container(
-                              child: Text(widget.artist.name!,
-                                style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
+                            Text(widget.artist.name!,
+                              style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 10),

@@ -33,14 +33,12 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     countDown();
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _countdownCtl.close();
     super.dispose();
   }
@@ -58,7 +56,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: 24),
+                    margin: const EdgeInsets.only(top: 24),
                     child: containerBack(context)
                   ),
                   Container(
@@ -81,8 +79,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                     style: const TextStyle(color: Colors.white, fontSize: 14),
                   ),
                   const SizedBox(height: 48,),
-                  Container(
-                  child: Form(
+                  Form(
                     key: _formKey,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -275,8 +272,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                         ),
                       ],
                     ),
-                  )
-                ),
+                  ),
                 const SizedBox(height: 20,),
                 StreamBuilder(
                   stream: _countdownCtl.stream,

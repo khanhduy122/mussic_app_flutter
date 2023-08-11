@@ -80,7 +80,7 @@ class _loginWithNumberPhoneState extends State<loginWithNumberPhone> {
                     child: Row(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 10),
+                          margin: const EdgeInsets.only(left: 10),
                           child: const Text(
                             '+84 ',
                             style: TextStyle(
@@ -139,11 +139,10 @@ class _loginWithNumberPhoneState extends State<loginWithNumberPhone> {
                           return;
                         }else{
                           if(numberPhone![0] == "0"){
-                            numberPhone = "+84" + numberPhone!.substring(1);
+                            numberPhone = "+84${numberPhone!.substring(1)}";
                           }else{
-                            numberPhone = "+84" + numberPhone!.substring(1);
+                            numberPhone = "+84${numberPhone!.substring(1)}";
                           }
-                          print(numberPhone!);
                           appState.authBloc.add(SendOTPSMSEvent(numberPhone: numberPhone!, context: context));
                         }
                       }

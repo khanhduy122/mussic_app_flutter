@@ -22,7 +22,6 @@ class _ListArtistRecentState extends State<ListArtistRecent> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getListArtistRecent();
     super.initState();
   }
@@ -30,9 +29,9 @@ class _ListArtistRecentState extends State<ListArtistRecent> {
   Future<void> getListArtistRecent() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> listPlayListRecent = prefs.getStringList(appKey.listArtistRecent) ?? [];
-    listPlayListRecent.forEach((element) {
+    for (var element in listPlayListRecent) {
       listArtist.add(Artist.fromJson(jsonDecode(element)));
-    });
+    }
     setState(() {
       
     });

@@ -10,15 +10,15 @@ class Chart {
 
   Chart.fromJson(Map<String, dynamic> json) {
     rTChart =
-        json['RTChart'] != null ? new RTChart.fromJson(json['RTChart']) : null;
+        json['RTChart'] != null ? RTChart.fromJson(json['RTChart']) : null;
     if (json['newRelease'] != null) {
       newRelease = <NewRelease>[];
       json['newRelease'].forEach((v) {
-        newRelease!.add(new NewRelease.fromJson(v));
+        newRelease!.add( NewRelease.fromJson(v));
       });
     }
     weekChart = json['weekChart'] != null
-        ? new WeekChart.fromJson(json['weekChart'])
+        ?  WeekChart.fromJson(json['weekChart'])
         : null;
   }
 }
@@ -42,10 +42,10 @@ class RTChart {
     if (json['items'] != null) {
       songs = <Song>[];
       json['items'].forEach((v) {
-        songs!.add(new Song.fromJson(v));
+        songs!.add( Song.fromJson(v));
       });
     }
-    chart = json['chart'] != null ? new Chart.fromJson(json['chart']) : null;
+    chart = json['chart'] != null ?  Chart.fromJson(json['chart']) : null;
     chartType = json['chartType'];
     sectionType = json['sectionType'];
     sectionId = json['sectionId'];
@@ -114,7 +114,7 @@ class NewRelease {
     if (json['artists'] != null) {
       artists = <Artist>[];
       json['artists'].forEach((v) {
-        artists!.add(new Artist.fromJson(v));
+        artists!.add( Artist.fromJson(v));
       });
     }
     isWorldWide = json['isWorldWide'];
@@ -150,9 +150,9 @@ class WeekChart {
   WeekChart({this.vn, this.us, this.korea});
 
   WeekChart.fromJson(Map<String, dynamic> json) {
-    vn = json['vn'] != null ? new ItemWeekChart.fromJson(json['vn']) : null;
-    us = json['us'] != null ? new ItemWeekChart.fromJson(json['us']) : null;
-    korea = json['korea'] != null ? new ItemWeekChart.fromJson(json['korea']) : null;
+    vn = json['vn'] != null ?  ItemWeekChart.fromJson(json['vn']) : null;
+    us = json['us'] != null ?  ItemWeekChart.fromJson(json['us']) : null;
+    korea = json['korea'] != null ?  ItemWeekChart.fromJson(json['korea']) : null;
   }
 }
 
@@ -204,7 +204,7 @@ class ItemWeekChart {
     if (json['items'] != null) {
       songs = <Song>[];
       json['items'].forEach((v) {
-        songs!.add(new Song.fromJson(v));
+        songs!.add( Song.fromJson(v));
       });
     }
     sectionId = json['sectionId'];

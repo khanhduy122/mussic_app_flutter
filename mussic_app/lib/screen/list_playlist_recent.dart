@@ -25,7 +25,6 @@ class _ListPlayListRecentState extends State<ListPlayListRecent> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getplayListRecent();
     super.initState();
   }
@@ -33,9 +32,9 @@ class _ListPlayListRecentState extends State<ListPlayListRecent> {
   Future<void> getplayListRecent() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> listPlayListRecent = prefs.getStringList(appKey.listPlayListRecent) ?? [];
-    listPlayListRecent.forEach((element) {
+    for (var element in listPlayListRecent) {
       listPlayList.add(PlayList.fromJson(jsonDecode(element)));
-    });
+    }
     setState(() {
       
     });
@@ -53,28 +52,30 @@ class _ListPlayListRecentState extends State<ListPlayListRecent> {
           Navigator.push(context, MaterialPageRoute(builder: (context) => PlayListScreen(playList: state.playList!),));
         }
       },
-      child: Column(
-          children: [
-            const SizedBox(height: 20,),
-            SizedBox(
-              height: listPlayList.length * 90,
-              child: ListView.builder(
-                itemCount: listPlayList.length,
-                itemBuilder: (context, index) {
-                  return ContainerPlayListHot(
-                    playList: listPlayList[index], 
-                    axis: Axis.horizontal, 
-                    ontap: ()  {
-                      _getPlayList.add(getInfoPlayListEvent(encodeId: listPlayList[index].encodeId!));
-                    }, 
-                    width: 70, 
-                    height: 70
-                  );
-                },
-              ),
-            )
-          ],
-        )
+      child: SingleChildScrollView(
+        child: Column(
+            children: [
+              const SizedBox(height: 20,),
+              SizedBox(
+                height: listPlayList.length * 90,
+                child: ListView.builder(
+                  itemCount: listPlayList.length,
+                  itemBuilder: (context, index) {
+                    return ContainerPlayListHot(
+                      playList: listPlayList[index], 
+                      axis: Axis.horizontal, 
+                      ontap: ()  {
+                        _getPlayList.add(getInfoPlayListEvent(encodeId: listPlayList[index].encodeId!));
+                      }, 
+                      width: 70, 
+                      height: 70
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
+      )
     );
   }
 }

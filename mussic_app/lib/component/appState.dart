@@ -14,7 +14,7 @@ class appState{
   static Song? songPlayed;
   static bool isGetSongPlayed = false;
   static StreamController streamCurrentSong = StreamController();
-  static User? get user => FirebaseAuth.instance.currentUser ?? null;
+  static User? get user => FirebaseAuth.instance.currentUser;
   static UserProfile? userProfile;
   static AudioPlayerBloc audioBloc = AudioPlayerBloc();
   static FirebaseAuthBloc authBloc = FirebaseAuthBloc();

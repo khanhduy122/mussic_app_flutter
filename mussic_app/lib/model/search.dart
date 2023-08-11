@@ -25,36 +25,36 @@ class Search {
   Search.fromJson(Map<String, dynamic> json) {
     if(json['top'] != null){
       if(json['top']['objectType'] == 'song'){
-        topSong = json['top'] != null ? new Song.fromJson(json['top']) : null;
+        topSong = json['top'] != null ?  Song.fromJson(json['top']) : null;
       }
       if(json['top']['objectType'] == 'artist'){
-          topArtist = json['top'] != null ? new Artist.fromJson(json['top']) : null;
+          topArtist = json['top'] != null ?  Artist.fromJson(json['top']) : null;
       }else{
-        topPlaylist = json['top'] != null ? new PlayList.fromJson(json['top']) : null;
+        topPlaylist = json['top'] != null ?  PlayList.fromJson(json['top']) : null;
       }   
     }
     if (json['artists'] != null) {
       artists = <Artist>[];
       json['artists'].forEach((v) {
-        artists!.add(new Artist.fromJson(v));
+        artists!.add( Artist.fromJson(v));
       });
     }
     if (json['songs'] != null) {
       songs = <Song>[];
       json['songs'].forEach((v) {
-        songs!.add(new Song.fromJson(v));
+        songs!.add( Song.fromJson(v));
       });
     }
     if (json['videos'] != null) {
       videos = <MV>[];
       json['videos'].forEach((v) {
-        videos!.add(new MV.fromJson(v));
+        videos!.add( MV.fromJson(v));
       });
     }
     if (json['playlists'] != null) {
       playlists = <PlayList>[];
       json['playlists'].forEach((v) {
-        playlists!.add(new PlayList.fromJson(v));
+        playlists!.add( PlayList.fromJson(v));
       });
     }
   }

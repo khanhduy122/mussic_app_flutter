@@ -8,7 +8,7 @@ void showDialogErro({required BuildContext context, required Object erro}){
     builder: (context) {
       return Center(
         child: Text(erro.toString(),
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       );
     },

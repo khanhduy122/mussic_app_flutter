@@ -20,7 +20,6 @@ class _ZingChartWeekScreenState extends State<ZingChartWeekScreen> {
  
   @override
   void initState() {
-    // TODO: implement initState
     indexTab = widget.index;
     super.initState();
   }

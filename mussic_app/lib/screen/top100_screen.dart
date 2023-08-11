@@ -16,9 +16,9 @@ class Top100Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PlayMussicBloc _getInfoPlayList = PlayMussicBloc();
+    final PlayMussicBloc getInfoPlayList = PlayMussicBloc();
     return BlocListener<PlayMussicBloc, PlayMussicState>(
-      bloc: _getInfoPlayList,
+      bloc: getInfoPlayList,
       listener: (context, state) {
         if(state.isLoading == true){
           appDiaLog.ShowDialogLoading(context);
@@ -77,7 +77,7 @@ class Top100Screen extends StatelessWidget {
                                   playList: top100s[index].playLists![indexPlayList], 
                                   axis: Axis.vertical, 
                                   ontap: (){
-                                    _getInfoPlayList.add(getInfoPlayListEvent(encodeId: top100s[index].playLists![indexPlayList].encodeId! ));
+                                    getInfoPlayList.add(getInfoPlayListEvent(encodeId: top100s[index].playLists![indexPlayList].encodeId! ));
                                   }, 
                                   width: 130, 
                                   height: 130

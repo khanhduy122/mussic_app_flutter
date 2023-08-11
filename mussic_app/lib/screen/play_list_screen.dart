@@ -50,7 +50,7 @@ class PlayListScreen extends StatelessWidget {
            ),
             const SizedBox(height: 24,),
             Container(
-              margin: EdgeInsets.only(left: 24, right: 24),
+              margin: const EdgeInsets.only(left: 24, right: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

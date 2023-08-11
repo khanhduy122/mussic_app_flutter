@@ -31,7 +31,6 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _controllerUser.close();
     super.dispose();
   }
@@ -150,7 +149,7 @@ class _UserScreenState extends State<UserScreen> {
                                   child: Image.asset(appAsset.iconAvataUser),
                                 ),
                                 Container(
-                                    margin: EdgeInsets.symmetric(vertical: 20),
+                                    margin: const EdgeInsets.symmetric(vertical: 20),
                                     child: const Text(
                                       'Bạn chưa đăng nhập',
                                       style: TextStyle(
@@ -163,7 +162,7 @@ class _UserScreenState extends State<UserScreen> {
                                   width: 150,
                                   radius: 20,
                                   ontap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => loginScreen(),));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const loginScreen(),));
                                   },
                                   child: const Text('Đăng Nhập',
                                     style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),

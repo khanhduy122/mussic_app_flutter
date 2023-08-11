@@ -14,20 +14,12 @@ class containerTop100 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(
-      //       context,
-      //       MaterialPageRoute(
-      //         builder: (context) =>
-      //             ListMussicTop100Screen(charts: charts),
-      //       ));
-      // },
       child: Container(
         height: 300,
         margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
             color: gradient == null ? appColor.darkGrey : null,
-            gradient: gradient == null ? null : gradient,
+            gradient: gradient,
             borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,25 +29,6 @@ class containerTop100 extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      // Text(
-                      //   charts.tiltle,
-                      //   style: TextStyle(
-                      //       color: appColor.LightGray,
-                      //       fontWeight: FontWeight.bold,
-                      //       fontSize: 16),
-                      // ),
-                      // Container(
-                      //   margin: EdgeInsets.only(left: 10),
-                      //   child: Icon(
-                      //     Icons.arrow_forward_ios,
-                      //     color: appColor.LightGray,
-                      //     size: 16,
-                      //   ),
-                      // ),
-                    ],
-                  ),
                   ContainerButton(
                     height: 30,
                     width: 30,

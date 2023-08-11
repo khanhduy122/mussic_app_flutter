@@ -35,7 +35,6 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseStata>{
           await FirebaseRepo.putFileAvatar(file: fileAvatar!).then((avatarUrl) async {
             await FirebaseRepo.upDateUserProfile(avatar: avatarUrl);
             emit(UserProfileState());
-            print("emit UserProfileState");
           });
           Navigator.pop(event.context);
         }

@@ -27,7 +27,6 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _textController.dispose();
     super.dispose();
   }
@@ -98,7 +97,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                   }
                   return null;
                 },
-                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                 decoration: const InputDecoration(
                   label: Text("Name", ),
                   labelStyle: TextStyle(color: Colors.white, fontSize: 16),

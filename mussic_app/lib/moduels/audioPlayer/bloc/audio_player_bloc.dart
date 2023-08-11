@@ -9,16 +9,15 @@ import 'package:mussic_app/component/appState.dart';
 import 'package:mussic_app/model/song.dart';
 import 'package:mussic_app/moduels/audioPlayer/events/audio_player_event.dart';
 import 'package:mussic_app/moduels/audioPlayer/repos/audio_player_repo.dart';
-import 'package:mussic_app/moduels/firebase/events/firebase_event.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 
-class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
+class AudioPlayerBloc extends Bloc<audioPlayerEvent, AudioPlayerState> {
   AudioPlayer audioPlayer = AudioPlayer();
   StreamSubscription? _streamSubscriptionUpdatePosition;
   StreamSubscription? _streamSubscriptionOnCompleted;
 
-  AudioPlayerBloc() : super(audiPlayerState()){
+  AudioPlayerBloc() : super(AudioPlayerState()){
 
     bool isLoaded = false;
 
@@ -33,7 +32,6 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
         }else{
           add(audioPlayerEventLoadURL(isGetSongPlayed: event.isGetSongPlayed, song: event.song));
         }
-        print(exits.exists());
       }
       
       if(event is audioPlayerEventLoadURL){
@@ -67,7 +65,7 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
           audioPlayer.stop();
           isLoaded = false;
         }
-        emit(audiPlayerState(isLoading: true));
+        emit(AudioPlayerState(isLoading: true));
         try {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           String saveInfoMussicLocal = jsonEncode(event.song.toJson());
@@ -77,10 +75,10 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
           isLoaded = true;
           if(event.isGetSongPlayed){
             audioPlayer.stop();
-            emit(audiPlayerState(isLoading: false, isPlaying: false, duration: audioPlayer.duration, currentPosition: audioPlayer.position));
+            emit(AudioPlayerState(isLoading: false, isPlaying: false, duration: audioPlayer.duration, currentPosition: audioPlayer.position));
           }else{
             audioPlayer.play();
-            emit(audiPlayerState(isLoading: false, isPlaying: true, duration: audioPlayer.duration, currentPosition: audioPlayer.position));
+            emit(AudioPlayerState(isLoading: false, isPlaying: true, duration: audioPlayer.duration, currentPosition: audioPlayer.position));
           }
           _streamSubscriptionUpdatePosition = audioPlayer.positionStream.listen((newPosition) {
             add(audioPlayerEventUploadPosition(currentPosition: newPosition));
@@ -89,8 +87,7 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
           
         } catch (e) {
         
-          print("erro audioPlayer $e");
-           emit(audiPlayerState(erro: e));
+           emit(AudioPlayerState(erro: e));
         }
       }
 
@@ -131,12 +128,12 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
         isLoaded = true;
         if(event.isGetSongPlayed){
             audioPlayer.stop();
-            emit(audiPlayerState(isLoading: false, isPlaying: false, duration: audioPlayer.duration, currentPosition: audioPlayer.position));
+            emit(AudioPlayerState(isLoading: false, isPlaying: false, duration: audioPlayer.duration, currentPosition: audioPlayer.position));
           }else{
             audioPlayer.play();
-            emit(audiPlayerState(isLoading: false, isPlaying: true, duration: audioPlayer.duration, currentPosition: audioPlayer.position));
+            emit(AudioPlayerState(isLoading: false, isPlaying: true, duration: audioPlayer.duration, currentPosition: audioPlayer.position));
           }
-        emit(audiPlayerState(isLoading: false, isPlaying: true, duration: audioPlayer.duration, currentPosition: audioPlayer.position));
+        emit(AudioPlayerState(isLoading: false, isPlaying: true, duration: audioPlayer.duration, currentPosition: audioPlayer.position));
         _streamSubscriptionUpdatePosition = audioPlayer.positionStream.listen((newPosition) {
           add(audioPlayerEventUploadPosition(currentPosition: newPosition));
         });
@@ -146,10 +143,10 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
         if(isLoaded){
           if(audioPlayer.playing){
             audioPlayer.pause();
-             emit(audiPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.position, duration: audioPlayer.duration));
+             emit(AudioPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.position, duration: audioPlayer.duration));
           }else{
             audioPlayer.play();
-             emit(audiPlayerState(isLoading: false, isPlaying: true, currentPosition: audioPlayer.position, duration: audioPlayer.duration));
+             emit(AudioPlayerState(isLoading: false, isPlaying: true, currentPosition: audioPlayer.position, duration: audioPlayer.duration));
           }
         }
       }
@@ -158,10 +155,10 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
         if(isLoaded){
           if(audioPlayer.playing) {
             audioPlayer.seek(event.duration);
-            emit(audiPlayerState(isLoading: false, isPlaying: true, currentPosition: audioPlayer.position, duration: audioPlayer.duration));
+            emit(AudioPlayerState(isLoading: false, isPlaying: true, currentPosition: audioPlayer.position, duration: audioPlayer.duration));
           }else{
             audioPlayer.seek(event.duration);
-            emit(audiPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.position, duration: audioPlayer.duration));
+            emit(AudioPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.position, duration: audioPlayer.duration));
           }
         }
       }
@@ -169,9 +166,9 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
       if(event is audioPlayerEventUploadPosition){
         if(isLoaded){
           if (audioPlayer.playing) {
-            emit(audiPlayerState(isLoading: false, isPlaying: true, currentPosition: event.currentPosition, duration: audioPlayer.duration));
+            emit(AudioPlayerState(isLoading: false, isPlaying: true, currentPosition: event.currentPosition, duration: audioPlayer.duration));
           }else {
-            emit(audiPlayerState(isLoading: false, isPlaying: false, currentPosition: event.currentPosition, duration: audioPlayer.duration));
+            emit(AudioPlayerState(isLoading: false, isPlaying: false, currentPosition: event.currentPosition, duration: audioPlayer.duration));
           }
         }
       }
@@ -184,13 +181,13 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
         }
         if(isLoaded){
           if(audioPlayer.playing){
-            emit(audiPlayerState(isLoading: false, isPlaying: true, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isRepeate: event.isRepeate));
+            emit(AudioPlayerState(isLoading: false, isPlaying: true, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isRepeate: event.isRepeate));
           }else{
-            emit(audiPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isRepeate: event.isRepeate));
+            emit(AudioPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isRepeate: event.isRepeate));
           }
         }
         else{
-          emit(audiPlayerState(isRepeate: event.isRepeate));
+          emit(AudioPlayerState(isRepeate: event.isRepeate));
         }
       }
 
@@ -205,7 +202,7 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
               songShuffle.shuffle();
               appState.listSongNext = songShuffle.sublist(0);
             }
-            emit(audiPlayerState(isLoading: false, isPlaying: true, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isShuffle: event.isShuffle));
+            emit(AudioPlayerState(isLoading: false, isPlaying: true, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isShuffle: event.isShuffle));
           }else{
             if(appState.listSong != null){
               appState.listSongCompleted.clear();
@@ -215,24 +212,24 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
               songShuffle.shuffle();
               appState.listSongNext = songShuffle.sublist(0);
             }
-            emit(audiPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isShuffle: event.isShuffle));
+            emit(AudioPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isShuffle: event.isShuffle));
           }
         }
         else{
-          emit(audiPlayerState(isShuffle: event.isShuffle));
+          emit(AudioPlayerState(isShuffle: event.isShuffle));
         }
       }
 
       if(event is audioPlayerEventHeart){
         if(audioPlayer.duration != null){
           if(audioPlayer.playing){
-            emit(audiPlayerState(isLoading: false, isPlaying: true, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isHeart: event.isHeart));
+            emit(AudioPlayerState(isLoading: false, isPlaying: true, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isHeart: event.isHeart));
           }else{
-            emit(audiPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isHeart: event.isHeart));
+            emit(AudioPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.position, duration: audioPlayer.duration, isHeart: event.isHeart));
           }
         }
         else{
-          emit(audiPlayerState(isHeart: event.isHeart));
+          emit(AudioPlayerState(isHeart: event.isHeart));
         }
       }
 
@@ -249,7 +246,7 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
             appState.currentSong = appState.listSongCompleted.last;
             add(audioPlayerSetMp3(isGetSongPlayed: false, song: appState.currentSong!));
           }
-          emit(nextMussic()); 
+          emit(NextMussic()); 
         }
       }
 
@@ -266,7 +263,7 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
             appState.currentSong = appState.listSongCompleted.last;
             add(audioPlayerSetMp3(isGetSongPlayed: false, song: appState.currentSong!));
           }
-          emit(backMussic());
+          emit(BackMussic());
         }
         
       }
@@ -277,7 +274,7 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
           add(audioPlayerEventNextMussic());
         }else{
           audioPlayer.stop();
-          emit(audiPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.duration, duration: audioPlayer.duration, isCompleted: true));
+          emit(AudioPlayerState(isLoading: false, isPlaying: false, currentPosition: audioPlayer.duration, duration: audioPlayer.duration, isCompleted: true));
         }
       }
 
@@ -293,7 +290,7 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, audiPlayerState> {
   }
 }
 
-class audiPlayerState{
+class AudioPlayerState{
   bool? isLoading ;
   bool? isPlaying = false;
   bool? isShuffle;
@@ -304,12 +301,12 @@ class audiPlayerState{
   Duration? duration;
   Object? erro;
 
-  audiPlayerState({this.currentPosition, this.duration, this.isHeart, this.isLoading, this.isRepeate, this.isShuffle, this.isPlaying, this.erro, this.isCompleted});
+  AudioPlayerState({this.currentPosition, this.duration, this.isHeart, this.isLoading, this.isRepeate, this.isShuffle, this.isPlaying, this.erro, this.isCompleted});
 }
 
-class nextMussic extends audiPlayerState{}
+class NextMussic extends AudioPlayerState{}
 
-class backMussic extends audiPlayerState{}
+class BackMussic extends AudioPlayerState{}
 
 
 
