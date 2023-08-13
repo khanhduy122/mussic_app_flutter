@@ -15,6 +15,7 @@ class getHomeDataRepo{
         if(response.statusCode == 200){
           Map<String, dynamic> mapResponse = json.decode(response.body);
           if(mapResponse["msg"] == "Success"){
+            print(mapResponse.toString());
             return HomeData.fromJson(mapResponse['data']);
           }else{
             throw Exception('failed');
@@ -23,7 +24,7 @@ class getHomeDataRepo{
           throw Exception('failed');
         }
       } catch (e) {
-        rethrow;
+        throw Exception('failed');
       }
     }else{
       throw NoIntenetException();
