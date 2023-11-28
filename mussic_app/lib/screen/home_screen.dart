@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mussic_app/component/appDiaLog.dart';
 import 'package:mussic_app/component/appState.dart';
@@ -62,7 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
         _pageControllerBanner.jumpToPage(0);
       }
     });
-
     super.initState();
   }
 
@@ -207,14 +207,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                     }
                                   }
                                 },
-                                child: Container(
-                                  height: 200,
-                                  decoration: BoxDecoration(
+                                child: CachedNetworkImage(
+                                  imageUrl: widget.homeData.banner!.items![index].banner!,
+                                  placeholder: (context, url) => Container(
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      color:  Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                  ),
+                                  imageBuilder: (context, imageProvider) => Container(
+                                    height: 200,
+                                    decoration: BoxDecoration(
                                       image: DecorationImage(
-                                          image: NetworkImage(widget.homeData.banner!.items![index].banner!),
-                                          fit: BoxFit.fill),
-                                      borderRadius: BorderRadius.circular(10)),
-                                )
+                                        image: imageProvider,
+                                        fit: BoxFit.fill
+                                      ),
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                  ),
+                                ),
                               );
                             },
                           ),

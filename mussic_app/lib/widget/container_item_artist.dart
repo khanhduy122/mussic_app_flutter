@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mussic_app/model/artist.dart';
 
@@ -16,16 +17,23 @@ class containerItemArtist extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            Container(
-              height: 80,
-              width: 80,
-              margin: const EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(artist.thumbnail!,),
-                  fit: BoxFit.fill
+            CachedNetworkImage(
+              imageUrl: artist.thumbnail!,
+              placeholder: (context, url) => Container(
+                height: 80, width: 80,
+                decoration: BoxDecoration(color:  Colors.grey[200]),
+              ),
+              imageBuilder: (context, imageProvider) => Container(
+                height: 80,
+                width: 80,
+                margin: const EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.fill
+                  ),
+                  borderRadius: BorderRadius.circular(40)
                 ),
-                borderRadius: BorderRadius.circular(40)
               ),
             ),
             Text(artist.name!,

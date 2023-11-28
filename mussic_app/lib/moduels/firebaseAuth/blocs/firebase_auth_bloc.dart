@@ -62,7 +62,7 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState>{
             Navigator.pop(event.context);
             Navigator.pop(event.context);
           }else{
-            final String token = await appState.user!.getIdToken();
+            final String token = await appState.user!.getIdToken() ?? "";
             Navigator.pop(event.context);
             Navigator.push(event.context, MaterialPageRoute(builder: (context) => SetupProfileScreen(numberPhone: numberPhone, userID: appState.user!.uid, token: token ),));
           }

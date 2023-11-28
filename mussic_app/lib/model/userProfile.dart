@@ -17,6 +17,7 @@ class UserProfile{
   List<Song>? likeSongs;
   List<PlayList>? likePlaylists;
   List<MV>? likeVideo;
+  List<PlayList>? userPlaylist;
 
   UserProfile({
     this.userID,
@@ -31,7 +32,8 @@ class UserProfile{
     this.likePlaylists,
     this.likeSongs,
     this.likeVideo,
-    this.recentArtists
+    this.recentArtists,
+    this.userPlaylist
   });
 
   UserProfile.formJson(Map<String, dynamic> json){

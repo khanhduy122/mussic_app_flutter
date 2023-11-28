@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:mussic_app/component/appDiaLog.dart';
 import 'package:mussic_app/component/appKey.dart';
 import 'package:mussic_app/component/appState.dart';
@@ -23,6 +25,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await FirebaseAppCheck.instance.activate();
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
   runApp(const MyApp());
 }
 
@@ -87,7 +95,10 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => appDiaLog.showDialogComfirmAndroid(context: context, tiltle: "Xác Nhận", subTitle: "Bạn có chắc muốn thoát khỏi ứng dụng"),
+      onWillPop: () => appDiaLog.showDialogComfirmAndroid(context: context, 
+      tiltle: "Xác Nhận", 
+      subTitle: "Bạn có chắc muốn thoát khỏi ứng dụng"
+      ),
       child: BlocBuilder<getHomeDataBloc, getHomeDataState>(
         bloc: _homeDataBloc,
         builder: (context, state) {

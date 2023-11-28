@@ -42,7 +42,6 @@ class HomeData{
 class homeItem {
   String? sectionType;
   String? title;
-  String? sectionId;
   Items? itemNewRelease;
   List<Song>? listSongNewReleaseChart;
   List<Items>? items;
@@ -52,7 +51,6 @@ class homeItem {
       {
       this.sectionType,
       this.title,
-      this.sectionId,
       this.listSongNewReleaseChart,
       this.itemNewRelease,
       this.items,
@@ -63,8 +61,6 @@ class homeItem {
   homeItem.fromJson(Map<String, dynamic> json) {
     sectionType = json['sectionType'];
     title = json['title'];
-    sectionId = json['sectionId'];
-
     if(json['items'] != null && sectionType == "RTChart"){
       listSongChart = <Song>[];
       json['items'].forEach((value){

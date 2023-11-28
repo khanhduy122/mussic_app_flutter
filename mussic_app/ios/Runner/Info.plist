@@ -54,5 +54,9 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Replace with your permission description.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 </dict>
 </plist>

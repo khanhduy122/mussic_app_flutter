@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mussic_app/component/app_color.dart';
 import 'package:mussic_app/model/charts.dart';
@@ -25,16 +26,22 @@ class containerZingChartsWeek extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              height: 100,
-              width: 100,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(itemWeekChart.songs![0].thumbnail!),
-                  fit: BoxFit.fill
+            CachedNetworkImage(
+              imageUrl: itemWeekChart.songs![0].thumbnail!,
+              placeholder: (context, url) => Container(
+                height: 100, width: 100,
+                decoration: BoxDecoration(color:  Colors.grey[200]),
+              ),
+              imageBuilder: (context, imageProvider) => Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.fill
+                  ),
+                  borderRadius: BorderRadius.circular(10)
                 ),
-                borderRadius: BorderRadius.circular(10)
               ),
             ),
             SizedBox(

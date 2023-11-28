@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mussic_app/component/appDiaLog.dart';
@@ -73,6 +75,16 @@ class __playMusicState extends State<playMussicScreen> {
     
         if(state is BackMussic){
           setState(() {});
+        }
+
+        if(state is AudioPlayerState){
+          if(state.erro != null){
+            if(state.erro is TimeoutException){
+              appDiaLog.showDialogNotify(content: "Vui lòng kiểm trả lại đường truyền", context: context);
+            }else{
+              appDiaLog.showDialogNotify(content: "Đã có lỗi xảy ra vui lòng thử lại sao", context: context);
+            }
+          }
         }
       },
       child: Scaffold(
@@ -303,7 +315,33 @@ class __playMusicState extends State<playMussicScreen> {
                             }
                   
                             if(state.erro != null){
-                              return Center(child: CircularProgressIndicator(),);
+                              return Column(
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                                    child: const LinearProgressIndicator(
+                                        backgroundColor: Colors.white30,
+                                        color: Colors.white,
+                                      ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          formatTime(Duration.zero),
+                                          style: const TextStyle(color: Colors.white),
+                                        ),
+                                        Text(
+                                          formatTime(Duration.zero),
+                                          style: const TextStyle(color: Colors.white),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
                             }
                 
                             return Column(

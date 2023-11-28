@@ -292,7 +292,7 @@ class _ArtistScreenState extends State<ArtistProfileScreen> {
                 widget.artist.sectionMV != null ?
                 widget.artist.sectionMV!.MVItems != null ? 
                 SizedBox(
-                  height: 250,
+                  height: 270,
                   child: PageView.builder(
                     controller: _pageControllerMV,
                     itemCount: widget.artist.sectionMV!.MVItems!.length >= 4 ? 4 : widget.artist.sectionMV!.MVItems!.length,

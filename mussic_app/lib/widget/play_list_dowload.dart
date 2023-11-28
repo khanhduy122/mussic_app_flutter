@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mussic_app/model/playlist.dart';
 
@@ -31,14 +32,23 @@ class PlayListDowload extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
                 child: Row(
                   children: [
-                    Container(
-                      height: 70,
-                      width: 70,
-                      decoration: BoxDecoration(
+                    CachedNetworkImage(
+                      imageUrl: playlists[index].thumbnail!,
+                      placeholder: (context, url) => Container(
+                        height: 70, width: 70,
+                        decoration: BoxDecoration(color:  Colors.grey[200]),
+                      ),
+                      imageBuilder: (context, imageProvider) => Container(
+                        height: 70,
+                        width: 70,
+                        decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(playlists[index].thumbnail!),
+                            image: imageProvider,
+                            fit: BoxFit.fill
                           ),
-                          borderRadius: BorderRadius.circular(5)),
+                          borderRadius: BorderRadius.circular(5)
+                        ),
+                      ),
                     ),
                     Container(
                       height: 70,

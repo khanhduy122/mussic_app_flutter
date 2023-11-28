@@ -190,4 +190,39 @@ class FirebaseRepo{
   static Stream<QuerySnapshot<Map<String, dynamic>>> getAllArtistRecent(){
     return firestore.collection(collectionUser).doc(appState.user!.phoneNumber).collection("recentArtists").orderBy("timestamp", descending: true).snapshots();
   }
+
+  // user play list ............................................................................................................................
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllUserPlayList(){
+    return firestore.collection(collectionUser).doc(appState.user!.phoneNumber).collection("userPlayList").orderBy("timestamp", descending: true).snapshots();
+  }
+
+  static Future<void> addUserPlayList({required PlayList playList}) async {
+    playList.timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    await firestore.collection(collectionUser).doc(appState.user!.phoneNumber).collection("userPlayList").doc(playList.timestamp).set(playList.toJson());
+  }
+
+  static Future<void> addSongToUserPlayList({required Song song, required PlayList playList}) async {
+    if(await checkSongToPlayList(song: song, playList: playList) == false){
+      song.timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+      await firestore.collection(collectionUser).doc(appState.user!.phoneNumber).collection('userPlayList').doc(playList.timestamp).collection("listSong").doc(song.encodeId).set(song.toJson());
+    }
+  }
+
+  static Future<bool> checkSongToPlayList({required Song song, required PlayList playList}) async {
+    final data = await firestore.collection(collectionUser).doc(appState.user!.phoneNumber).collection('userPlayList').doc(playList.timestamp).collection("listSong").doc(song.encodeId).get();
+    if(data.exists){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllSongUserPlayList({required String encodeID}) {
+    return firestore.collection(collectionUser).doc(appState.user!.phoneNumber).collection('userPlayList').doc(encodeID).collection('listSong').orderBy('timestamp', descending: true).snapshots();
+  }
+
+  static Future<void> deleteSongToUserPlayList({required String songID, required String PlayListID}) async {
+    await firestore.collection(collectionUser).doc(appState.user!.phoneNumber).collection('userPlayList').doc(PlayListID).collection('listSong').doc(songID).delete();
+  }
 }

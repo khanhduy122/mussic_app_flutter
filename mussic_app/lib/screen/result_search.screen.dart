@@ -127,27 +127,27 @@ class _ResultSearchScreenState extends State<ResultSearchScreen> {
                         tabs: [
                           Tab(
                             child: Text('Nổi Bật',
-                              style: TextStyle(color: Colors.white, fontSize: 12, ),
+                              style: TextStyle(color: Colors.white, fontSize: 10, ),
                             ),
                           ),
                           Tab(
                             child: Text('Bài Hát',
-                              style: TextStyle(color: Colors.white, fontSize: 12,),
+                              style: TextStyle(color: Colors.white, fontSize: 10,),
                             ),
                           ),
                           Tab(
                             child: Text('Nghệ Sĩ',
-                              style: TextStyle(color: Colors.white, fontSize: 12),
+                              style: TextStyle(color: Colors.white, fontSize: 10),
                             ),
                           ),
                           Tab(
                             child: Text('Playlist',
-                              style: TextStyle(color: Colors.white, fontSize: 12),
+                              style: TextStyle(color: Colors.white, fontSize: 10),
                             ),
                           ),
                           Tab(
                             child: Text('MV',
-                              style: TextStyle(color: Colors.white, fontSize: 12),
+                              style: TextStyle(color: Colors.white, fontSize: 10),
                             ),
                           )
                         ],
@@ -329,7 +329,7 @@ class _ResultSearchScreenState extends State<ResultSearchScreen> {
           ) : Container(),
           search.videos != null ? const SizedBox(height: 10,) : Container(),
           search.videos != null ? SizedBox(
-            height: 250,
+            height: 300,
             child: PageView.builder(
               controller: pageController,
               itemCount: search.videos!.length,

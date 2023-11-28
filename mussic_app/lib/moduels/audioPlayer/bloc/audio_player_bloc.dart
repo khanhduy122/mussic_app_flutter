@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:just_audio/just_audio.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:mussic_app/component/appKey.dart';
 import 'package:mussic_app/component/appState.dart';
 import 'package:mussic_app/model/song.dart';
@@ -71,7 +72,15 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, AudioPlayerState> {
           String saveInfoMussicLocal = jsonEncode(event.song.toJson());
           prefs.setString(appKey.songPlayed, saveInfoMussicLocal);
           final res = await audioPlayerRepo.fetchLinkSong(http.Client(), event.song.encodeId!);
-          await audioPlayer.setUrl(res);
+          await audioPlayer.setAudioSource(AudioSource.uri(
+            Uri.parse(res),
+            tag: MediaItem(
+              id: "0", 
+              title: event.song.title!,
+              artist: event.song.artistsNames!,
+              artUri: Uri.parse(event.song.thumbnail!)
+            )
+          ));
           isLoaded = true;
           if(event.isGetSongPlayed){
             audioPlayer.stop();
@@ -86,7 +95,9 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, AudioPlayerState> {
 
           
         } catch (e) {
-        
+          if(e is TimeoutException){
+            emit(AudioPlayerState(erro: TimeoutException("get audio timeout")));
+          }
            emit(AudioPlayerState(erro: e));
         }
       }
@@ -124,7 +135,16 @@ class AudioPlayerBloc extends Bloc<audioPlayerEvent, AudioPlayerState> {
           isLoaded = false;
         }
         Directory appDocdir = await getApplicationDocumentsDirectory();
-        await audioPlayer.setFilePath('${appDocdir.path}/mp3/${event.song.encodeId}.mp3');
+        await audioPlayer.setAudioSource(
+          AudioSource.asset(
+            '${appDocdir.path}/mp3/${event.song.encodeId}.mp3',
+            tag: MediaItem(
+              id: "0", 
+              title: event.song.title!,
+              artist: event.song.artistsNames!,
+            )
+          ),
+        );
         isLoaded = true;
         if(event.isGetSongPlayed){
             audioPlayer.stop();

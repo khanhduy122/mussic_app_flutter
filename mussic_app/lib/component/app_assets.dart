@@ -40,4 +40,6 @@ class appAsset{
   static const String iconTop100 = '${PathIcon}icon_top.png';
   static const String iconDownload = '${PathIcon}icon_download.png';
   static const String iconDownloaded = '${PathIcon}icon_downloaded.png';
+  static const String iconAdd = '${PathIcon}icon_add.png';
+  static const String iconArtist = '${PathIcon}icon_artist.png';
 }

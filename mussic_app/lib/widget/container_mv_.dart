@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import "package:flutter/material.dart";
 import 'package:mussic_app/component/app_color.dart';
 import '../model/mv.dart';
@@ -22,12 +23,22 @@ class ContainerMV extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      Container(
-                        height: 200,
-                        decoration: BoxDecoration(
+                      CachedNetworkImage(
+                        imageUrl: mv.thumbnail!,
+                        placeholder: (context, url) => Container(
+                          height: 200,
+                          decoration: BoxDecoration(color:  Colors.grey[200]),
+                        ),
+                        imageBuilder: (context, imageProvider) => Container(
+                          height: 200,
+                          decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage(mv.thumbnailM!), fit: BoxFit.fill),
-                            borderRadius: BorderRadius.circular(5)),
+                              image: imageProvider,
+                              fit: BoxFit.fill
+                            ),
+                            borderRadius: BorderRadius.circular(5)
+                          ),
+                        ),
                       ),
                       Positioned(
                         bottom: 10,
